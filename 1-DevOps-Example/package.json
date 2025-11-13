@@ -1,0 +1,24 @@
+{
+  "name": "devops-demo-app",
+  "version": "1.0.0",
+  "description": "Ejemplo práctico de DevOps con CI/CD",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "jest --coverage",
+    "lint": "eslint .",
+    "dev": "nodemon app.js"
+  },
+  "keywords": ["devops", "cicd", "demo"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.54.0",
+    "nodemon": "^3.0.2",
+    "supertest": "^6.3.3"
+  }
+}
