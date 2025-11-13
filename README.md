@@ -405,12 +405,6 @@ Este proyecto es de uso educativo y está disponible bajo licencia MIT.
 
 ---
 
-## 👤 Autor
-
-**Santiago** ([@Sthiiago](https://github.com/Sthiiago))
-
----
-
 ## ⭐ Agradecimientos
 
 - A la comunidad de DevOps y DevSecOps
