@@ -1,0 +1,207 @@
+{
+  "info": {
+    "name": "DevOps Demo - API Testing",
+    "description": "Colección de Postman para demostrar la aplicación DevOps en clase",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Home - Info de la App",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": [""]
+        },
+        "description": "Endpoint principal que muestra información básica de la aplicación DevOps"
+      },
+      "response": []
+    },
+    {
+      "name": "2. Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["health"]
+        },
+        "description": "Endpoint de health check para monitoreo - muestra el uptime del servidor"
+      },
+      "response": []
+    },
+    {
+      "name": "3. Lista de Usuarios",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/users",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "users"]
+        },
+        "description": "Obtiene la lista de usuarios de ejemplo (DevOps Engineer, Developer, QA Engineer)"
+      },
+      "response": []
+    },
+    {
+      "name": "4. Calculadora - Suma",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"operation\": \"add\",\n  \"a\": 5,\n  \"b\": 3\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/calculate",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "calculate"]
+        },
+        "description": "Ejemplo de suma: 5 + 3 = 8"
+      },
+      "response": []
+    },
+    {
+      "name": "5. Calculadora - Resta",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"operation\": \"subtract\",\n  \"a\": 10,\n  \"b\": 4\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/calculate",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "calculate"]
+        },
+        "description": "Ejemplo de resta: 10 - 4 = 6"
+      },
+      "response": []
+    },
+    {
+      "name": "6. Calculadora - Multiplicación",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"operation\": \"multiply\",\n  \"a\": 4,\n  \"b\": 5\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/calculate",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "calculate"]
+        },
+        "description": "Ejemplo de multiplicación: 4 × 5 = 20"
+      },
+      "response": []
+    },
+    {
+      "name": "7. Calculadora - División",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"operation\": \"divide\",\n  \"a\": 20,\n  \"b\": 4\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/calculate",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "calculate"]
+        },
+        "description": "Ejemplo de división: 20 ÷ 4 = 5"
+      },
+      "response": []
+    },
+    {
+      "name": "8. Calculadora - División por Cero",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"operation\": \"divide\",\n  \"a\": 10,\n  \"b\": 0\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/calculate",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "calculate"]
+        },
+        "description": "Ejemplo de manejo de errores: división por cero"
+      },
+      "response": []
+    },
+    {
+      "name": "9. Calculadora - Operación Inválida",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"operation\": \"invalid\",\n  \"a\": 5,\n  \"b\": 3\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/calculate",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "calculate"]
+        },
+        "description": "Ejemplo de validación: operación no válida"
+      },
+      "response": []
+    }
+  ]
+}

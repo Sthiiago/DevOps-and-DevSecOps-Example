@@ -1,0 +1,359 @@
+{
+  "info": {
+    "name": "DevSecOps Demo - Security Testing",
+    "description": "Colección de Postman para demostrar seguridad integrada en DevSecOps",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "📋 Información General",
+      "item": [
+        {
+          "name": "1. Home - Features de Seguridad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": [""]
+            },
+            "description": "Muestra todas las características de seguridad implementadas en la aplicación"
+          },
+          "response": []
+        },
+        {
+          "name": "2. Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["health"]
+            },
+            "description": "Health check con información de seguridad habilitada"
+          },
+          "response": []
+        },
+        {
+          "name": "3. Información de Seguridad",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/security-info",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "security-info"]
+            },
+            "description": "Muestra todas las medidas de seguridad implementadas y compliance (OWASP Top 10, PCI-DSS, GDPR)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔐 Autenticación",
+      "item": [
+        {
+          "name": "4. Login Exitoso",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Guardar el token automáticamente",
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set(\"jwt_token\", jsonData.token);",
+                  "    pm.test(\"Token guardado correctamente\", function () {",
+                  "        pm.expect(jsonData.token).to.be.a('string');",
+                  "    });",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"Admin123!\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "login"]
+            },
+            "description": "Login con credenciales correctas. El token JWT se guarda automáticamente.\n\n✅ Credenciales válidas:\n- Username: admin\n- Password: Admin123!"
+          },
+          "response": []
+        },
+        {
+          "name": "5. Login - Credenciales Incorrectas",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"wrongpassword\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "login"]
+            },
+            "description": "❌ Demostración de seguridad: Login con password incorrecta\n\nEspera un error 401 - Credenciales inválidas"
+          },
+          "response": []
+        },
+        {
+          "name": "6. Login - Username muy corto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"ab\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "login"]
+            },
+            "description": "❌ Demostración de validación de entrada\n\nUsername debe tener entre 3 y 30 caracteres.\nEspera un error 400 - Bad Request"
+          },
+          "response": []
+        },
+        {
+          "name": "7. Login - Password muy corta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"12345\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "login"]
+            },
+            "description": "❌ Demostración de validación de entrada\n\nPassword debe tener mínimo 6 caracteres.\nEspera un error 400 - Bad Request"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔒 Rutas Protegidas",
+      "item": [
+        {
+          "name": "8. Acceso SIN Token (DEBE FALLAR)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/secure/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "secure", "profile"]
+            },
+            "description": "❌ Demostración de autorización\n\nIntentar acceder sin token debe fallar.\nEspera un error 401 - Token no proporcionado\n\n⚠️ ESTO ES LO ESPERADO - muestra que la seguridad funciona"
+          },
+          "response": []
+        },
+        {
+          "name": "9. Acceso con Token Inválido (DEBE FALLAR)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer token-invalido-123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/secure/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "secure", "profile"]
+            },
+            "description": "❌ Demostración de validación de token\n\nToken inválido debe ser rechazado.\nEspera un error 403 - Token inválido o expirado"
+          },
+          "response": []
+        },
+        {
+          "name": "10. Acceso CON Token Válido (DEBE FUNCIONAR)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/secure/profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "secure", "profile"]
+            },
+            "description": "✅ Acceso autorizado con token JWT válido\n\nUsa el token guardado del login.\nMuestra el perfil del usuario autenticado.\n\n💡 Ejecuta primero el request '4. Login Exitoso' para obtener el token"
+          },
+          "response": []
+        },
+        {
+          "name": "11. Enviar Datos Seguros CON Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": \"Datos importantes de la empresa\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/secure/data",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "secure", "data"]
+            },
+            "description": "✅ Envío de datos con validación y autorización\n\nLos datos son sanitizados antes de procesarse.\n\n💡 Requiere token JWT válido"
+          },
+          "response": []
+        },
+        {
+          "name": "12. Datos Vacíos - Validación (DEBE FALLAR)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": \"\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/secure/data",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "secure", "data"]
+            },
+            "description": "❌ Demostración de validación de entrada\n\nDatos vacíos no deben ser aceptados.\nEspera un error 400 - Validación fallida"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "⚡ Rate Limiting",
+      "item": [
+        {
+          "name": "13. Test Rate Limiting - Request 1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/security-info",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "security-info"]
+            },
+            "description": "Ejecuta este request múltiples veces rápidamente para probar el rate limiting.\n\nDespués de 100 requests en 15 minutos, el servidor bloqueará las peticiones."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🚫 Manejo de Errores",
+      "item": [
+        {
+          "name": "14. Ruta No Existente - 404",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/ruta-que-no-existe",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["ruta-que-no-existe"]
+            },
+            "description": "Demostración de manejo seguro de errores.\n\nEspera un error 404 - Ruta no encontrada\n\nNota: El mensaje de error no expone información sensible del sistema."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "jwt_token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
