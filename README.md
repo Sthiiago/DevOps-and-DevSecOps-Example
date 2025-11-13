@@ -1,11 +1,13 @@
 # 🚀 DevOps y DevSecOps - Ejemplos Prácticos
 
-[![CI/CD Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?logo=github-actions)](https://github.com/Sthiiago/DevOps-and-DevSecOps-Example)
+[![CI/CD Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?logo=github-actions)](https://github.com/Sthiiago/DevOps-and-DevSecOps-Example/actions)
 [![Security](https://img.shields.io/badge/Security-DevSecOps-success)](https://github.com/Sthiiago/DevOps-and-DevSecOps-Example)
 [![Node.js](https://img.shields.io/badge/Node.js-v22.14.0-339933?logo=node.js)](https://nodejs.org/)
 [![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?logo=docker)](https://www.docker.com/)
 
-Ejemplos prácticos completos de **DevOps** y **DevSecOps** para presentaciones educativas, demostraciones en clase y aprendizaje de mejores prácticas.
+> 🎓 **Ejemplos prácticos completos** de **DevOps** y **DevSecOps** para presentaciones educativas, demostraciones en clase y aprendizaje de mejores prácticas.
+> 
+> ⚡ Los pipelines de CI/CD se ejecutan automáticamente en cada push. [Ver Actions →](https://github.com/Sthiiago/DevOps-and-DevSecOps-Example/actions)
 
 ## 📋 Contenido del Repositorio
 
