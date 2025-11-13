@@ -11,10 +11,6 @@ on:
     paths:
       - '2-DevSecOps-Example/**'
 
-defaults:
-  run:
-    working-directory: 2-DevSecOps-Example
-
 jobs:
   lint:
     name:  Linting + Security Rules
@@ -31,9 +27,11 @@ jobs:
           cache-dependency-path: '2-DevSecOps-Example/package-lock.json'
 
       - name: Instalar dependencias
+        working-directory: 2-DevSecOps-Example
         run: npm ci
 
       - name: Ejecutar ESLint
+        working-directory: 2-DevSecOps-Example
         run: npm run lint
 
   test:
@@ -52,9 +50,11 @@ jobs:
           cache-dependency-path: '2-DevSecOps-Example/package-lock.json'
 
       - name: Instalar dependencias
+        working-directory: 2-DevSecOps-Example
         run: npm ci
 
       - name: Ejecutar tests de seguridad
+        working-directory: 2-DevSecOps-Example
         run: npm test
 
       - name: Upload cobertura
@@ -74,8 +74,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: '2-DevSecOps-Example/package-lock.json'
+
+      - name: Instalar dependencias
+        working-directory: 2-DevSecOps-Example
+        run: npm ci
 
       - name: NPM Audit
+        working-directory: 2-DevSecOps-Example
         run: npm audit --audit-level=moderate
         continue-on-error: true
 

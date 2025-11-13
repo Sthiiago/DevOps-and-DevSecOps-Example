@@ -11,10 +11,6 @@ on:
     paths:
       - '1-DevOps-Example/**'
 
-defaults:
-  run:
-    working-directory: 1-DevOps-Example
-
 jobs:
   lint:
     name:  Linting
@@ -31,9 +27,11 @@ jobs:
           cache-dependency-path: '1-DevOps-Example/package-lock.json'
 
       - name: Instalar dependencias
+        working-directory: 1-DevOps-Example
         run: npm ci
 
       - name: Ejecutar ESLint
+        working-directory: 1-DevOps-Example
         run: npm run lint
 
   test:
@@ -52,9 +50,11 @@ jobs:
           cache-dependency-path: '1-DevOps-Example/package-lock.json'
 
       - name: Instalar dependencias
+        working-directory: 1-DevOps-Example
         run: npm ci
 
       - name: Ejecutar tests
+        working-directory: 1-DevOps-Example
         run: npm test
 
       - name: Upload cobertura
