@@ -1,0 +1,34 @@
+{
+  "name": "devsecops-demo-app",
+  "version": "1.0.0",
+  "description": "Ejemplo práctico de DevSecOps con seguridad integrada",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "jest --coverage",
+    "lint": "eslint .",
+    "security:audit": "npm audit --audit-level=moderate",
+    "security:check": "npm run security:audit && npm run lint:security",
+    "lint:security": "eslint --plugin security --rule 'security/*: error' .",
+    "dev": "nodemon app.js"
+  },
+  "keywords": ["devsecops", "security", "demo"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1",
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.54.0",
+    "eslint-plugin-security": "^1.7.1",
+    "nodemon": "^3.0.2",
+    "supertest": "^6.3.3"
+  }
+}

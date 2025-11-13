@@ -1,0 +1,11 @@
+node_modules/
+coverage/
+.env
+.env.local
+.env.production
+*.log
+.DS_Store
+*.pem
+*.key
+.vscode/
+.idea/
