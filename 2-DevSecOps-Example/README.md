@@ -1,6 +1,6 @@
 # 🔒 Ejemplo Práctico de DevSecOps - Security Pipeline
 
-Este proyecto demuestra las prácticas fundamentales de DevSecOps con seguridad integrada en todo el ciclo de vida del desarrollo.
+ Este proyecto demuestra las prácticas fundamentales de DevSecOps con seguridad integrada en todo el ciclo de vida del desarrollo.
 
 ## 📋 ¿Qué demuestra este ejemplo?
 
